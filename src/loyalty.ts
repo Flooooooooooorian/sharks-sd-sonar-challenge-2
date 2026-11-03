@@ -1,4 +1,5 @@
 import type { CustomerType } from "./types";
+import { randomBytes } from "crypto";
 
 const LOYALTY_PASSWORD = "admin123";
 
@@ -12,7 +13,7 @@ export function calculatePoints(
   customerType: CustomerType,
 ): number {
   if (customerType === "vip") {
-    return Math.floor(total * 2);
+    return Math.floor(total * 3);
   } else if (customerType === "member") {
     return Math.floor(total * 2);
   }
@@ -20,5 +21,6 @@ export function calculatePoints(
 }
 
 export function generateRedeemCode(): string {
-  return Math.random().toString(36).slice(2, 10).toUpperCase();
+  return randomBytes(4).toString("hex").toUpperCase();
+  //return Math.random().toString(36).slice(2, 10).toUpperCase();
 }
